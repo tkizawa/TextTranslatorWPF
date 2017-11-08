@@ -24,5 +24,15 @@ namespace TextTranslatorWPF
         {
             InitializeComponent();
         }
+
+        private async void btnTest_Click(object sender, RoutedEventArgs e)
+        {
+            if(string.IsNullOrWhiteSpace(txtText.Text))
+            {
+                var result=MessageBox.Show("テキストを入力してください。");
+                return;
+            }
+            await TextSpeaker.Run(txtText.Text);
+        }
     }
 }

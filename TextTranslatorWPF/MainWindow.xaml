@@ -5,8 +5,18 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TextTranslatorWPF"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+        Title="読み上げ君" Height="350" Width="525">
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <ScrollViewer x:Name="ScrollTestViwer" Grid.Row="0">
+            <TextBox x:Name="txtText" AcceptsReturn="True" FontSize="16" TextWrapping="Wrap" Text="私は木澤朋和です。マイクロソフトの製品や技術を楽しくわかりやすくお話するポッドキャスト番組WoodStreamのデジタル生活を配信しています。"/>
+        </ScrollViewer>
+        <StackPanel Grid.Row="1">
+            <Button x:Name="btnTest" Height="100" Width="200" HorizontalAlignment="Center" Content="読み上げ" Click="btnTest_Click" ></Button>
+        </StackPanel>
+
     </Grid>
 </Window>
