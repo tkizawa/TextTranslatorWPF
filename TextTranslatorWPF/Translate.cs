@@ -1,18 +1,20 @@
 ﻿using System;
 using System.IO;
-using System.Media;
 using System.Net;
 using System.Net.Http;
+using System.Runtime.Serialization;
 using System.Threading.Tasks;
 
 
 namespace TextTranslatorWPF
 {
-    class TextSpeaker
+    class Translate
     {
         private const string subscriptionKey = "6f6a4a6d7ba644f493f71272ea6a30b6";
 
-        public static async Task Run(string text,string lang)
+        public static string TextOut;
+
+        public static async Task Run(string text)
         {
             var authTokenSource = new AzureAuthToken(subscriptionKey.Trim());
             string authToken = string.Empty;
@@ -35,16 +37,20 @@ namespace TextTranslatorWPF
                 throw;
             }
 
-            string uri = "https://api.microsofttranslator.com/v2/Http.svc/Speak?text="+text+"&language="+lang+"&format=" +  WebUtility.HtmlEncode("audio/wav") + "&options=MaxQuality";
-            WebRequest webRequest = WebRequest.Create(uri);
-            webRequest.Headers.Add("Authorization", authToken);
-            using (WebResponse response = webRequest.GetResponse())
+            //            string text = "Good morning.";
+            string from = "ja-jp";
+            string to = "en";
+            string uri = "https://api.microsofttranslator.com/v2/Http.svc/Translate?text=" + WebUtility.HtmlEncode(text) + "&from=" + from + "&to=" + to;
+            HttpWebRequest httpWebRequest = (HttpWebRequest)WebRequest.Create(uri);
+            httpWebRequest.Headers.Add("Authorization", authToken);
+            using (WebResponse response = httpWebRequest.GetResponse())
             using (Stream stream = response.GetResponseStream())
             {
-                using (SoundPlayer player = new SoundPlayer(stream))
-                {
-                    player.PlaySync();
-                }
+                DataContractSerializer dcs = new DataContractSerializer(Type.GetType("System.String"));
+                string translation = (string)dcs.ReadObject(stream);
+                //                Console.WriteLine("Translation for source text '{0}' from {1} to {2} is", text, "en", "ja-jp");
+                //txtText2.text=translation;
+                TextOut=translation;
             }
         }
     }

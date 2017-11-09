@@ -9,13 +9,17 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <ScrollViewer x:Name="ScrollTestViwer" Grid.Row="0">
-            <TextBox x:Name="txtText" AcceptsReturn="True" FontSize="16" TextWrapping="Wrap" Text="私は木澤朋和です。マイクロソフトの製品や技術を楽しくわかりやすくお話するポッドキャスト番組WoodStreamのデジタル生活を配信しています。"/>
+            <TextBox x:Name="txtText" AcceptsReturn="True" FontSize="16" TextWrapping="Wrap" Text="私は木澤朋和です。マイクロソフトの製品や技術を楽しくわかりやすくお話するポッドキャスト番組「WoodStreamのデジタル生活」を配信しています。"/>
         </ScrollViewer>
-        <StackPanel Grid.Row="1">
-            <Button x:Name="btnTest" Height="100" Width="200" HorizontalAlignment="Center" Content="読み上げ" Click="btnTest_Click" ></Button>
+        <ScrollViewer x:Name="ScrollTestViwer2" Grid.Row="1">
+            <TextBox x:Name="txtText2" AcceptsReturn="True" FontSize="16" TextWrapping="Wrap" Text="ここに英訳"/>
+        </ScrollViewer>
+        <StackPanel Grid.Row="2">
+            <Button x:Name="btnTest" Height="100" Width="200" HorizontalAlignment="Center" Content="翻訳&amp;読み上げ" Click="btnTest_Click" ></Button>
         </StackPanel>
 
     </Grid>

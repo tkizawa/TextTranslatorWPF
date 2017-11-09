@@ -32,7 +32,14 @@ namespace TextTranslatorWPF
                 var result=MessageBox.Show("テキストを入力してください。");
                 return;
             }
-            await TextSpeaker.Run(txtText.Text);
+
+            string text = string.Empty;
+
+            await Translate.Run(txtText.Text);
+            txtText2.Text = Translate.TextOut;
+
+            await TextSpeaker.Run(txtText.Text,"ja-jp");
+            await TextSpeaker.Run(txtText2.Text, "en");
         }
     }
 }
